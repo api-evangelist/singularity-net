@@ -1,0 +1,263 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "SingularityNET Marketplace API"
+  description: "SingularityNET decentralized AI marketplace REST API. Enables service discovery, organization browsing, payment channel management, and metadata access for the blockchain-based AI services network."
+  tags:
+  - Artificial Intelligence
+  - Blockchain
+  - AI Marketplace
+  - Decentralized AI
+  - Web3
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SNET_WALLET_ADDRESS: SNET_WALLET_ADDRESS
+
+capability:
+  consumes:
+    - type: http
+      namespace: singularitynet
+      baseUri: https://marketplace-mt-v2.singularitynet.io
+      description: "SingularityNET AI Marketplace REST API (no auth required for discovery)."
+      resources:
+        - name: organizations
+          path: /org
+          description: "AI service provider organization management."
+          operations:
+            - name: list-organizations
+              method: GET
+              description: "List all organizations publishing AI services."
+              inputParameters:
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: organization
+          path: /org/{org_id}
+          description: "Single organization operations."
+          operations:
+            - name: get-organization
+              method: GET
+              description: "Get organization details."
+              inputParameters:
+                - name: org_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Organization identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: org-services
+          path: /org/{org_id}/service
+          description: "Services published by an organization."
+          operations:
+            - name: list-org-services
+              method: GET
+              description: "List AI services by organization."
+              inputParameters:
+                - name: org_id
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: services
+          path: /service
+          description: "AI service marketplace discovery."
+          operations:
+            - name: list-services
+              method: GET
+              description: "List all AI services on the marketplace."
+              inputParameters:
+                - name: search_string
+                  in: query
+                  type: string
+                  required: false
+                - name: tags
+                  in: query
+                  type: array
+                  required: false
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: service
+          path: /org/{org_id}/service/{service_id}
+          description: "Single service metadata."
+          operations:
+            - name: get-service
+              method: GET
+              description: "Get full service metadata including pricing and endpoints."
+              inputParameters:
+                - name: org_id
+                  in: path
+                  type: string
+                  required: true
+                - name: service_id
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: service-groups
+          path: /org/{org_id}/service/{service_id}/group
+          description: "Service endpoint groups."
+          operations:
+            - name: list-service-groups
+              method: GET
+              description: "Get service endpoint groups and pricing."
+              inputParameters:
+                - name: org_id
+                  in: path
+                  type: string
+                  required: true
+                - name: service_id
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: open-channel
+          path: /channel/open
+          description: "Payment channel operations."
+          operations:
+            - name: open-payment-channel
+              method: POST
+              description: "Open an MPE payment channel to fund AI service calls."
+              body:
+                type: json
+                data:
+                  org_id: "{{tools.org_id}}"
+                  service_id: "{{tools.service_id}}"
+                  group_id: "{{tools.group_id}}"
+                  amount_in_cogs: "{{tools.amount_in_cogs}}"
+                  expiration: "{{tools.expiration}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: channel
+          path: /channel/{channel_id}
+          description: "Payment channel management."
+          operations:
+            - name: get-channel
+              method: GET
+              description: "Get payment channel balance and status."
+              inputParameters:
+                - name: channel_id
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: extend-channel
+          path: /channel/{channel_id}/extend
+          description: "Extend payment channel."
+          operations:
+            - name: extend-channel
+              method: POST
+              description: "Add funds or extend expiration of a payment channel."
+              inputParameters:
+                - name: channel_id
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  amount: "{{tools.amount}}"
+                  expiration: "{{tools.expiration}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: singularitynet-rest
+      resources:
+        - path: /v1/organizations
+          name: organizations
+          operations:
+            - method: GET
+              name: list-organizations
+              description: "List AI organizations."
+        - path: /v1/services
+          name: services
+          operations:
+            - method: GET
+              name: list-services
+              description: "Search AI services."
+
+    - type: mcp
+      port: 9100
+      namespace: singularitynet-mcp
+      transport: http
+      tools:
+        - name: list-services
+          description: "Search and browse AI services on the SingularityNET marketplace."
+          hints:
+            readOnly: true
+          call: "singularitynet.list-services"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-service
+          description: "Get full metadata for a specific AI service."
+          hints:
+            readOnly: true
+          call: "singularitynet.get-service"
+          with:
+            org_id: "tools.org_id"
+            service_id: "tools.service_id"
+          outputParameters:
+            - type: object
+              mapping: "$."

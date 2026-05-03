@@ -1,0 +1,96 @@
+name: SingularityNET Vocabulary
+description: Domain vocabulary for the SingularityNET decentralized AI marketplace platform covering blockchain, payment channels, AI service architecture, and registry concepts.
+url: https://raw.githubusercontent.com/api-evangelist/singularity-net/refs/heads/main/vocabulary/singularitynet-vocabulary.yml
+created: '2026-05-02'
+modified: '2026-05-02'
+tags:
+- Artificial Intelligence
+- Blockchain
+- Decentralized AI
+- Web3
+terms:
+- term: Organization
+  definition: A registered entity on the SingularityNET network that publishes AI services. Organizations are stored in the Registry smart contract with their metadata on IPFS.
+  type: resource
+  relatedTerms:
+  - Service
+  - Registry
+
+- term: Service
+  definition: An AI capability published on the SingularityNET marketplace by an organization. Each service has a gRPC proto specification, metadata stored on IPFS, and one or more endpoint groups with pricing.
+  type: resource
+  relatedTerms:
+  - Organization
+  - ServiceGroup
+  - Daemon
+
+- term: Daemon
+  definition: The snetd software component that wraps an AI service and exposes it to the SingularityNET Network. The daemon handles blockchain authentication, MPE payment verification, and proxies gRPC calls to the underlying AI application.
+  type: concept
+  relatedTerms:
+  - Service
+  - gRPC
+  - MPE
+
+- term: ServiceGroup
+  definition: A named set of daemon endpoints within a service that share payment channel configuration and pricing. Consumers connect to a specific group to access service endpoints.
+  type: resource
+  relatedTerms:
+  - Service
+  - Pricing
+
+- term: gRPC
+  definition: The remote procedure call protocol used for service invocation on SingularityNET. Each AI service defines its API using Protocol Buffer (.proto) files. Service calls are made directly to daemon endpoints via gRPC after channel establishment.
+  type: concept
+  relatedTerms:
+  - Daemon
+  - Service
+
+- term: MPE
+  definition: Multi-Party Escrow. The Ethereum smart contract that manages payment channels between consumers and service providers. Consumers deposit ASI tokens into MPE and authorize payment per service call through signed channel claims.
+  type: concept
+  relatedTerms:
+  - PaymentChannel
+  - ASI
+
+- term: PaymentChannel
+  definition: A bilateral payment relationship between a consumer and service group funded with ASI tokens. Channels have a balance (in cogs), a nonce (preventing replay attacks), and an expiration block number.
+  type: resource
+  relatedTerms:
+  - MPE
+  - Cogs
+
+- term: Cogs
+  definition: The smallest unit of ASI token used for micropayments in SingularityNET. One ASI token equals 10^8 cogs. Service pricing is expressed in cogs per call.
+  type: concept
+  relatedTerms:
+  - ASI
+  - PaymentChannel
+
+- term: ASI
+  definition: The Artificial Superintelligence Alliance token (formerly AGI/FET) used for payments, staking, and governance on the SingularityNET network. Service consumers purchase ASI to fund payment channels.
+  type: concept
+  relatedTerms:
+  - Cogs
+  - MPE
+
+- term: Registry
+  definition: An ERC-165 compliant smart contract on Ethereum that stores organization and service metadata URIs. The Registry is the authoritative source for discovering services on the SingularityNET network.
+  type: concept
+  relatedTerms:
+  - Organization
+  - Service
+
+- term: IPFS
+  definition: InterPlanetary File System. Used by SingularityNET to store service metadata and proto files in a decentralized content-addressed manner. Metadata URIs are IPFS hashes referenced from Registry.
+  type: concept
+  relatedTerms:
+  - Registry
+  - Service
+
+- term: Marketplace
+  definition: The SingularityNET web application and API that provides a user-friendly interface for browsing, discovering, and interacting with AI services. The marketplace abstracts blockchain complexity for non-technical users.
+  type: concept
+  relatedTerms:
+  - Service
+  - Organization

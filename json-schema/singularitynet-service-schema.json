@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/singularity-net/main/json-schema/singularitynet-service-schema.json",
+  "title": "SingularityNET Service",
+  "description": "Schema for a SingularityNET AI service resource on the decentralized marketplace.",
+  "type": "object",
+  "properties": {
+    "org_id": {"type": "string", "description": "Publishing organization identifier."},
+    "service_id": {"type": "string", "description": "Service identifier within the organization."},
+    "display_name": {"type": "string", "description": "Human-readable service name."},
+    "description": {"type": "string", "description": "Full service description."},
+    "short_description": {"type": "string", "description": "Brief service summary."},
+    "url": {"type": "string", "format": "uri", "description": "Service documentation URL."},
+    "tags": {"type": "array", "items": {"type": "string"}, "description": "Category tags."},
+    "is_available": {"type": "boolean", "description": "Whether the service is currently available."},
+    "metadata_uri": {"type": "string", "description": "IPFS URI for full service metadata."},
+    "service_api_source": {"type": "string", "description": "IPFS URI for the gRPC proto API specification."},
+    "groups": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/ServiceGroup"},
+      "description": "Endpoint groups with pricing."
+    },
+    "rating": {
+      "type": "object",
+      "properties": {
+        "total_users_rated": {"type": "integer"},
+        "average_rating": {"type": "number", "minimum": 0, "maximum": 5}
+      }
+    }
+  },
+  "required": ["org_id", "service_id", "display_name"],
+  "$defs": {
+    "ServiceGroup": {
+      "type": "object",
+      "properties": {
+        "group_id": {"type": "string"},
+        "group_name": {"type": "string"},
+        "endpoints": {
+          "type": "array",
+          "items": {"type": "object", "properties": {"endpoint": {"type": "string"}}}
+        },
+        "pricing": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/Pricing"}
+        }
+      }
+    },
+    "Pricing": {
+      "type": "object",
+      "properties": {
+        "price_model": {"type": "string", "enum": ["fixed_price", "fixed_price_per_kilo_bytes"]},
+        "price_in_cogs": {"type": "integer", "description": "Price in cogs (1 ASI = 10^8 cogs)."},
+        "default": {"type": "boolean"}
+      }
+    }
+  }
+}

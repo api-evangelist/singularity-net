@@ -1,0 +1,9 @@
+name: SingularityNET
+description: SingularityNET decentralized AI marketplace API review.
+url: https://raw.githubusercontent.com/api-evangelist/singularity-net/refs/heads/main/review.yml
+created: '2026-05-02'
+modified: '2026-05-02'
+reviews:
+- date: '2026-05-02'
+  rating: 3
+  summary: SingularityNET provides a unique decentralized AI marketplace built on Ethereum. The architecture combines blockchain smart contracts (Registry, MPE), IPFS metadata storage, and gRPC service invocation via the snetd daemon. REST API for marketplace discovery is publicly accessible. Complex payment channel management (MPE) requires Web3/Ethereum wallet integration.

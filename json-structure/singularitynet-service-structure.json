@@ -1,0 +1,68 @@
+{
+  "title": "SingularityNET Service Structure",
+  "description": "Structural documentation for SingularityNET AI Service, Organization, ServiceGroup, and PaymentChannel resources.",
+  "version": "1.0",
+  "structure": {
+    "Organization": {
+      "description": "An entity that publishes AI services on the SingularityNET network.",
+      "fields": {
+        "org_id": {"type": "string", "description": "Unique organization identifier."},
+        "org_name": {"type": "string"},
+        "org_type": {"type": "enum", "values": ["individual", "organization"]},
+        "description": {"type": "string"},
+        "short_description": {"type": "string"},
+        "url": {"type": "string"},
+        "contacts": {"type": "array", "items": "Contact"},
+        "metadata_uri": {"type": "string", "description": "IPFS metadata URI."},
+        "service_count": {"type": "integer"}
+      }
+    },
+    "Service": {
+      "description": "An AI service published on the SingularityNET marketplace.",
+      "fields": {
+        "org_id": {"type": "string"},
+        "service_id": {"type": "string"},
+        "display_name": {"type": "string"},
+        "description": {"type": "string"},
+        "short_description": {"type": "string"},
+        "url": {"type": "string"},
+        "tags": {"type": "array", "items": "string"},
+        "is_available": {"type": "boolean"},
+        "metadata_uri": {"type": "string"},
+        "service_api_source": {"type": "string", "description": "IPFS proto file URI."},
+        "groups": {"type": "array", "items": "ServiceGroup"},
+        "rating": {"type": "object", "fields": {"average_rating": {"type": "float"}, "total_users_rated": {"type": "integer"}}}
+      }
+    },
+    "ServiceGroup": {
+      "description": "A set of daemon endpoints with payment channel configuration.",
+      "fields": {
+        "group_id": {"type": "string"},
+        "group_name": {"type": "string"},
+        "endpoints": {"type": "array", "description": "gRPC daemon endpoint URLs."},
+        "pricing": {"type": "array", "items": "Pricing"},
+        "payment": {"type": "object", "description": "MPE payment configuration."}
+      }
+    },
+    "Pricing": {
+      "description": "Service call pricing in cogs.",
+      "fields": {
+        "price_model": {"type": "enum", "values": ["fixed_price", "fixed_price_per_kilo_bytes"]},
+        "price_in_cogs": {"type": "integer", "description": "Price per call (1 ASI = 10^8 cogs)."},
+        "default": {"type": "boolean"}
+      }
+    },
+    "PaymentChannel": {
+      "description": "An MPE payment channel for funding AI service calls with ASI tokens.",
+      "fields": {
+        "channel_id": {"type": "string"},
+        "nonce": {"type": "integer"},
+        "balance_in_cogs": {"type": "string"},
+        "pending": {"type": "string"},
+        "endpoint": {"type": "string"},
+        "expiration": {"type": "integer", "description": "Expiration block number."},
+        "signer": {"type": "string", "description": "Ethereum wallet address."}
+      }
+    }
+  }
+}

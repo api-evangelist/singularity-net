@@ -1,0 +1,47 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "snet": "https://singularitynet.io/vocab#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Organization": "schema:Organization",
+    "Service": "schema:SoftwareApplication",
+    "ServiceGroup": "snet:ServiceGroup",
+    "PaymentChannel": "snet:PaymentChannel",
+    "Pricing": "snet:Pricing",
+
+    "org_id": "@id",
+    "service_id": "@id",
+    "channel_id": "@id",
+
+    "org_name": "schema:name",
+    "display_name": "schema:name",
+    "description": "schema:description",
+    "short_description": "schema:abstract",
+    "url": "schema:url",
+    "tags": "schema:keywords",
+    "is_available": "schema:isAvailable",
+
+    "contacts": "schema:contactPoint",
+    "email": "schema:email",
+    "metadata_uri": "snet:metadataUri",
+    "service_api_source": "snet:apiSource",
+    "groups": "snet:serviceGroups",
+    "rating": "schema:aggregateRating",
+    "average_rating": "schema:ratingValue",
+    "total_users_rated": "schema:ratingCount",
+
+    "group_id": "@id",
+    "group_name": "schema:name",
+    "endpoints": "snet:endpoints",
+    "pricing": "snet:pricing",
+    "price_model": "snet:priceModel",
+    "price_in_cogs": "snet:priceInCogs",
+
+    "balance_in_cogs": "snet:balanceInCogs",
+    "expiration": "snet:expirationBlock",
+    "signer": "snet:signerAddress",
+    "nonce": "snet:channelNonce"
+  }
+}

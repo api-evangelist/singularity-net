@@ -1,0 +1,66 @@
+extends: spectral:oas
+rules:
+  singularitynet-operation-summary-title-case:
+    description: All operation summaries must use Title Case.
+    message: 'Summary "{{value}}" must use Title Case.'
+    severity: warn
+    given: '$.paths[*][*].summary'
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[A-Z][a-z]+(\s[A-Z][a-z]+)*$'
+
+  singularitynet-operation-ids-camel-case:
+    description: Operation IDs should use camelCase.
+    message: 'OperationId "{{value}}" should be camelCase.'
+    severity: warn
+    given: '$.paths[*][*].operationId'
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-zA-Z0-9]+$'
+
+  singularitynet-tags-required:
+    description: All operations must include at least one tag.
+    message: Operation must include at least one tag.
+    severity: warn
+    given: '$.paths[*][*]'
+    then:
+      field: tags
+      function: defined
+
+  singularitynet-description-required:
+    description: All operations must have a description.
+    message: Operation must include a description.
+    severity: warn
+    given: '$.paths[*][*]'
+    then:
+      field: description
+      function: defined
+
+  singularitynet-response-200-required:
+    description: Successful operations must define a 200 response.
+    message: Operation must define a 200 success response.
+    severity: error
+    given: '$.paths[*][*].responses'
+    then:
+      field: '200'
+      function: defined
+
+  singularitynet-data-envelope:
+    description: Response bodies should use a data envelope wrapper.
+    message: Response body should wrap content in a data property.
+    severity: info
+    given: "$.paths[*][*].responses['200'].content['application/json'].schema.properties"
+    then:
+      field: data
+      function: defined
+
+  singularitynet-path-params-described:
+    description: All path parameters must have descriptions.
+    message: Path parameter must have a description.
+    severity: warn
+    given: '$.paths[*][*].parameters[?(@.in == "path")]'
+    then:
+      field: description
+      function: defined

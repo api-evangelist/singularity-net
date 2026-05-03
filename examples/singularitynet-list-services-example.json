@@ -1,0 +1,29 @@
+{
+  "title": "List Services Example",
+  "description": "Example request and response for searching AI services on the SingularityNET marketplace.",
+  "request": {
+    "method": "GET",
+    "url": "https://marketplace-mt-v2.singularitynet.io/service?search_string=image+classification&tags=computer-vision&limit=5",
+    "headers": {}
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "data": [
+        {
+          "org_id": "snet",
+          "service_id": "image-classifier",
+          "display_name": "Image Classifier",
+          "short_description": "Deep learning image classification using ResNet-50.",
+          "tags": ["computer-vision", "image-classification", "deep-learning"],
+          "is_available": true,
+          "rating": {
+            "total_users_rated": 42,
+            "average_rating": 4.2
+          }
+        }
+      ],
+      "total": 1
+    }
+  }
+}
