@@ -1,8 +1,9 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "SingularityNET AI Service Discovery"
-  description: "Workflow capability for discovering, evaluating, and accessing AI services on the SingularityNET decentralized marketplace. Covers organization browsing, service discovery and metadata, endpoint retrieval, and payment channel management for service access."
+  label: SingularityNET AI Service Discovery
+  description: Workflow capability for discovering, evaluating, and accessing AI services on the SingularityNET decentralized
+    marketplace. Covers organization browsing, service discovery and metadata, endpoint retrieval, and payment channel management
+    for service access.
   tags:
   - Artificial Intelligence
   - AI Marketplace
@@ -10,232 +11,417 @@ info:
   - Decentralized AI
   - Service Discovery
   - Web3
-  created: "2026-05-02"
-  modified: "2026-05-02"
-
+  created: '2026-05-02'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      SNET_WALLET_ADDRESS: SNET_WALLET_ADDRESS
-
+- namespace: env
+  keys:
+    SNET_WALLET_ADDRESS: SNET_WALLET_ADDRESS
 capability:
   consumes:
-    - import: singularitynet
-      location: ./shared/singularitynet-marketplace.yaml
-
+  - type: http
+    namespace: singularitynet
+    baseUri: https://marketplace-mt-v2.singularitynet.io
+    description: SingularityNET AI Marketplace REST API (no auth required for discovery).
+    resources:
+    - name: organizations
+      path: /org
+      description: AI service provider organization management.
+      operations:
+      - name: list-organizations
+        method: GET
+        description: List all organizations publishing AI services.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+        - name: offset
+          in: query
+          type: integer
+          required: false
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: organization
+      path: /org/{org_id}
+      description: Single organization operations.
+      operations:
+      - name: get-organization
+        method: GET
+        description: Get organization details.
+        inputParameters:
+        - name: org_id
+          in: path
+          type: string
+          required: true
+          description: Organization identifier.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: org-services
+      path: /org/{org_id}/service
+      description: Services published by an organization.
+      operations:
+      - name: list-org-services
+        method: GET
+        description: List AI services by organization.
+        inputParameters:
+        - name: org_id
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: services
+      path: /service
+      description: AI service marketplace discovery.
+      operations:
+      - name: list-services
+        method: GET
+        description: List all AI services on the marketplace.
+        inputParameters:
+        - name: search_string
+          in: query
+          type: string
+          required: false
+        - name: tags
+          in: query
+          type: array
+          required: false
+        - name: limit
+          in: query
+          type: integer
+          required: false
+        - name: offset
+          in: query
+          type: integer
+          required: false
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: service
+      path: /org/{org_id}/service/{service_id}
+      description: Single service metadata.
+      operations:
+      - name: get-service
+        method: GET
+        description: Get full service metadata including pricing and endpoints.
+        inputParameters:
+        - name: org_id
+          in: path
+          type: string
+          required: true
+        - name: service_id
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: service-groups
+      path: /org/{org_id}/service/{service_id}/group
+      description: Service endpoint groups.
+      operations:
+      - name: list-service-groups
+        method: GET
+        description: Get service endpoint groups and pricing.
+        inputParameters:
+        - name: org_id
+          in: path
+          type: string
+          required: true
+        - name: service_id
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: open-channel
+      path: /channel/open
+      description: Payment channel operations.
+      operations:
+      - name: open-payment-channel
+        method: POST
+        description: Open an MPE payment channel to fund AI service calls.
+        body:
+          type: json
+          data:
+            org_id: '{{tools.org_id}}'
+            service_id: '{{tools.service_id}}'
+            group_id: '{{tools.group_id}}'
+            amount_in_cogs: '{{tools.amount_in_cogs}}'
+            expiration: '{{tools.expiration}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: channel
+      path: /channel/{channel_id}
+      description: Payment channel management.
+      operations:
+      - name: get-channel
+        method: GET
+        description: Get payment channel balance and status.
+        inputParameters:
+        - name: channel_id
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: extend-channel
+      path: /channel/{channel_id}/extend
+      description: Extend payment channel.
+      operations:
+      - name: extend-channel
+        method: POST
+        description: Add funds or extend expiration of a payment channel.
+        inputParameters:
+        - name: channel_id
+          in: path
+          type: string
+          required: true
+        body:
+          type: json
+          data:
+            amount: '{{tools.amount}}'
+            expiration: '{{tools.expiration}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: ai-discovery-api
-      description: "Unified REST API for AI service discovery and access management on SingularityNET."
-      resources:
-        - path: /v1/organizations
-          name: organizations
-          description: "AI service provider organizations."
-          operations:
-            - method: GET
-              name: list-organizations
-              description: "List all AI service publishing organizations on the network."
-              call: "singularitynet.list-organizations"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/organizations/{id}
-          name: organization
-          description: "Single organization details."
-          operations:
-            - method: GET
-              name: get-organization
-              description: "Get organization profile and contact information."
-              call: "singularitynet.get-organization"
-              with:
-                org_id: "rest.id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/organizations/{id}/services
-          name: org-services
-          description: "Services by organization."
-          operations:
-            - method: GET
-              name: list-org-services
-              description: "List all AI services published by a specific organization."
-              call: "singularitynet.list-org-services"
-              with:
-                org_id: "rest.id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/services
-          name: services
-          description: "AI service marketplace."
-          operations:
-            - method: GET
-              name: list-services
-              description: "Search and browse all AI services on the marketplace."
-              call: "singularitynet.list-services"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/organizations/{org_id}/services/{id}
-          name: service
-          description: "Single AI service metadata."
-          operations:
-            - method: GET
-              name: get-service
-              description: "Get full service metadata including pricing and gRPC endpoints."
-              call: "singularitynet.get-service"
-              with:
-                org_id: "rest.org_id"
-                service_id: "rest.id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/organizations/{org_id}/services/{id}/groups
-          name: service-groups
-          description: "Service endpoint groups."
-          operations:
-            - method: GET
-              name: list-service-groups
-              description: "Get service endpoint groups and pricing."
-              call: "singularitynet.list-service-groups"
-              with:
-                org_id: "rest.org_id"
-                service_id: "rest.id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/channels
-          name: open-channel
-          description: "Payment channel management."
-          operations:
-            - method: POST
-              name: open-payment-channel
-              description: "Open an MPE payment channel to fund AI service calls."
-              call: "singularitynet.open-payment-channel"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/channels/{id}
-          name: channel
-          description: "Single payment channel."
-          operations:
-            - method: GET
-              name: get-channel
-              description: "Get payment channel balance and expiration status."
-              call: "singularitynet.get-channel"
-              with:
-                channel_id: "rest.id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/channels/{id}/extend
-          name: extend-channel
-          description: "Channel extension."
-          operations:
-            - method: POST
-              name: extend-channel
-              description: "Add funds or extend channel expiration."
-              call: "singularitynet.extend-channel"
-              with:
-                channel_id: "rest.id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9090
-      namespace: ai-discovery-mcp
-      transport: http
-      description: "MCP server for AI-assisted discovery and management of decentralized AI services on SingularityNET."
-      tools:
-        - name: list-organizations
-          description: "List all AI service publishing organizations on the SingularityNET network."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "singularitynet.list-organizations"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-organization
-          description: "Get details about a specific AI service provider organization."
-          hints:
-            readOnly: true
-          call: "singularitynet.get-organization"
-          with:
-            org_id: "tools.org_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-org-services
-          description: "List all AI services published by a specific organization."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "singularitynet.list-org-services"
-          with:
-            org_id: "tools.org_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-services
-          description: "Search and browse AI services on the SingularityNET marketplace by keyword or tag."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "singularitynet.list-services"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-service
-          description: "Get full metadata for a specific AI service including pricing, endpoints, and API specification."
-          hints:
-            readOnly: true
-          call: "singularitynet.get-service"
-          with:
-            org_id: "tools.org_id"
-            service_id: "tools.service_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-service-groups
-          description: "Get service endpoint groups, gRPC daemon addresses, and pricing for an AI service."
-          hints:
-            readOnly: true
-          call: "singularitynet.list-service-groups"
-          with:
-            org_id: "tools.org_id"
-            service_id: "tools.service_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: open-payment-channel
-          description: "Open a Multi-Party Escrow payment channel with ASI tokens to fund AI service calls."
-          hints:
-            readOnly: false
-          call: "singularitynet.open-payment-channel"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-channel
-          description: "Check the balance and expiration of a payment channel."
-          hints:
-            readOnly: true
-          call: "singularitynet.get-channel"
-          with:
-            channel_id: "tools.channel_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: extend-channel
-          description: "Add ASI token funds or extend the expiration of an existing payment channel."
-          hints:
-            readOnly: false
-            idempotent: true
-          call: "singularitynet.extend-channel"
-          with:
-            channel_id: "tools.channel_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: ai-discovery-api
+    description: Unified REST API for AI service discovery and access management on SingularityNET.
+    resources:
+    - path: /v1/organizations
+      name: organizations
+      description: AI service provider organizations.
+      operations:
+      - method: GET
+        name: list-organizations
+        description: List all AI service publishing organizations on the network.
+        call: singularitynet.list-organizations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{id}
+      name: organization
+      description: Single organization details.
+      operations:
+      - method: GET
+        name: get-organization
+        description: Get organization profile and contact information.
+        call: singularitynet.get-organization
+        with:
+          org_id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{id}/services
+      name: org-services
+      description: Services by organization.
+      operations:
+      - method: GET
+        name: list-org-services
+        description: List all AI services published by a specific organization.
+        call: singularitynet.list-org-services
+        with:
+          org_id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/services
+      name: services
+      description: AI service marketplace.
+      operations:
+      - method: GET
+        name: list-services
+        description: Search and browse all AI services on the marketplace.
+        call: singularitynet.list-services
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{org_id}/services/{id}
+      name: service
+      description: Single AI service metadata.
+      operations:
+      - method: GET
+        name: get-service
+        description: Get full service metadata including pricing and gRPC endpoints.
+        call: singularitynet.get-service
+        with:
+          org_id: rest.org_id
+          service_id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{org_id}/services/{id}/groups
+      name: service-groups
+      description: Service endpoint groups.
+      operations:
+      - method: GET
+        name: list-service-groups
+        description: Get service endpoint groups and pricing.
+        call: singularitynet.list-service-groups
+        with:
+          org_id: rest.org_id
+          service_id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/channels
+      name: open-channel
+      description: Payment channel management.
+      operations:
+      - method: POST
+        name: open-payment-channel
+        description: Open an MPE payment channel to fund AI service calls.
+        call: singularitynet.open-payment-channel
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/channels/{id}
+      name: channel
+      description: Single payment channel.
+      operations:
+      - method: GET
+        name: get-channel
+        description: Get payment channel balance and expiration status.
+        call: singularitynet.get-channel
+        with:
+          channel_id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/channels/{id}/extend
+      name: extend-channel
+      description: Channel extension.
+      operations:
+      - method: POST
+        name: extend-channel
+        description: Add funds or extend channel expiration.
+        call: singularitynet.extend-channel
+        with:
+          channel_id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: ai-discovery-mcp
+    transport: http
+    description: MCP server for AI-assisted discovery and management of decentralized AI services on SingularityNET.
+    tools:
+    - name: list-organizations
+      description: List all AI service publishing organizations on the SingularityNET network.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: singularitynet.list-organizations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-organization
+      description: Get details about a specific AI service provider organization.
+      hints:
+        readOnly: true
+      call: singularitynet.get-organization
+      with:
+        org_id: tools.org_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-org-services
+      description: List all AI services published by a specific organization.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: singularitynet.list-org-services
+      with:
+        org_id: tools.org_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-services
+      description: Search and browse AI services on the SingularityNET marketplace by keyword or tag.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: singularitynet.list-services
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-service
+      description: Get full metadata for a specific AI service including pricing, endpoints, and API specification.
+      hints:
+        readOnly: true
+      call: singularitynet.get-service
+      with:
+        org_id: tools.org_id
+        service_id: tools.service_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-service-groups
+      description: Get service endpoint groups, gRPC daemon addresses, and pricing for an AI service.
+      hints:
+        readOnly: true
+      call: singularitynet.list-service-groups
+      with:
+        org_id: tools.org_id
+        service_id: tools.service_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: open-payment-channel
+      description: Open a Multi-Party Escrow payment channel with ASI tokens to fund AI service calls.
+      hints:
+        readOnly: false
+      call: singularitynet.open-payment-channel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-channel
+      description: Check the balance and expiration of a payment channel.
+      hints:
+        readOnly: true
+      call: singularitynet.get-channel
+      with:
+        channel_id: tools.channel_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: extend-channel
+      description: Add ASI token funds or extend the expiration of an existing payment channel.
+      hints:
+        readOnly: false
+        idempotent: true
+      call: singularitynet.extend-channel
+      with:
+        channel_id: tools.channel_id
+      outputParameters:
+      - type: object
+        mapping: $.
