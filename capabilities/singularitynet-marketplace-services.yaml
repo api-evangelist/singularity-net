@@ -1,0 +1,183 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SingularityNET Marketplace API — Services
+  description: 'SingularityNET Marketplace API — Services. 3 operations. Lead operation: List Organization Services. Self-contained
+    Naftiko capability covering one Singularity Net business surface.'
+  tags:
+  - Singularity Net
+  - Services
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SINGULARITY_NET_API_KEY: SINGULARITY_NET_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: singularitynet-marketplace-services
+    baseUri: https://marketplace-mt-v2.singularitynet.io
+    description: SingularityNET Marketplace API — Services business capability. Self-contained, no shared references.
+    resources:
+    - name: org-org_id-service
+      path: /org/{org_id}/service
+      operations:
+      - name: listorgservices
+        method: GET
+        description: List Organization Services
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: org_id
+          in: path
+          type: string
+          description: Unique organization identifier
+          required: true
+    - name: org-org_id-service-service_id
+      path: /org/{org_id}/service/{service_id}
+      operations:
+      - name: getservice
+        method: GET
+        description: Get Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: org_id
+          in: path
+          type: string
+          description: Organization identifier
+          required: true
+        - name: service_id
+          in: path
+          type: string
+          description: Service identifier within the organization
+          required: true
+    - name: service
+      path: /service
+      operations:
+      - name: listservices
+        method: GET
+        description: List Services
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: search_string
+          in: query
+          type: string
+          description: Text search across service names and descriptions
+        - name: tags
+          in: query
+          type: array
+          description: Filter services by tag
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+  exposes:
+  - type: rest
+    namespace: singularitynet-marketplace-services-rest
+    port: 8080
+    description: REST adapter for SingularityNET Marketplace API — Services. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/org/{org-id}/service
+      name: org-org-id-service
+      description: REST surface for org-org_id-service.
+      operations:
+      - method: GET
+        name: listorgservices
+        description: List Organization Services
+        call: singularitynet-marketplace-services.listorgservices
+        with:
+          org_id: rest.org_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/org/{org-id}/service/{service-id}
+      name: org-org-id-service-service-id
+      description: REST surface for org-org_id-service-service_id.
+      operations:
+      - method: GET
+        name: getservice
+        description: Get Service
+        call: singularitynet-marketplace-services.getservice
+        with:
+          org_id: rest.org_id
+          service_id: rest.service_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/service
+      name: service
+      description: REST surface for service.
+      operations:
+      - method: GET
+        name: listservices
+        description: List Services
+        call: singularitynet-marketplace-services.listservices
+        with:
+          search_string: rest.search_string
+          tags: rest.tags
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: singularitynet-marketplace-services-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SingularityNET Marketplace API — Services. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-organization-services
+      description: List Organization Services
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: singularitynet-marketplace-services.listorgservices
+      with:
+        org_id: tools.org_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-service
+      description: Get Service
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: singularitynet-marketplace-services.getservice
+      with:
+        org_id: tools.org_id
+        service_id: tools.service_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-services
+      description: List Services
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: singularitynet-marketplace-services.listservices
+      with:
+        search_string: tools.search_string
+        tags: tools.tags
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.

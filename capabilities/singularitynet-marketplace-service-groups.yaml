@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SingularityNET Marketplace API — Service Groups
+  description: 'SingularityNET Marketplace API — Service Groups. 1 operations. Lead operation: List Service Groups. Self-contained
+    Naftiko capability covering one Singularity Net business surface.'
+  tags:
+  - Singularity Net
+  - Service Groups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SINGULARITY_NET_API_KEY: SINGULARITY_NET_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: singularitynet-marketplace-service-groups
+    baseUri: https://marketplace-mt-v2.singularitynet.io
+    description: SingularityNET Marketplace API — Service Groups business capability. Self-contained, no shared references.
+    resources:
+    - name: org-org_id-service-service_id-group
+      path: /org/{org_id}/service/{service_id}/group
+      operations:
+      - name: listservicegroups
+        method: GET
+        description: List Service Groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: org_id
+          in: path
+          type: string
+          required: true
+        - name: service_id
+          in: path
+          type: string
+          required: true
+  exposes:
+  - type: rest
+    namespace: singularitynet-marketplace-service-groups-rest
+    port: 8080
+    description: REST adapter for SingularityNET Marketplace API — Service Groups. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/org/{org-id}/service/{service-id}/group
+      name: org-org-id-service-service-id-group
+      description: REST surface for org-org_id-service-service_id-group.
+      operations:
+      - method: GET
+        name: listservicegroups
+        description: List Service Groups
+        call: singularitynet-marketplace-service-groups.listservicegroups
+        with:
+          org_id: rest.org_id
+          service_id: rest.service_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: singularitynet-marketplace-service-groups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SingularityNET Marketplace API — Service Groups. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-service-groups
+      description: List Service Groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: singularitynet-marketplace-service-groups.listservicegroups
+      with:
+        org_id: tools.org_id
+        service_id: tools.service_id
+      outputParameters:
+      - type: object
+        mapping: $.
