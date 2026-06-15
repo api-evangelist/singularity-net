@@ -1,0 +1,244 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SingularityNET Marketplace API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Organizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://marketplace-mt-v2.singularitynet.io/org",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of organizations to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              }
+            ]
+          },
+          "docs": "Retrieve all registered organizations on the SingularityNET network that publish AI services."
+        },
+        {
+          "info": {
+            "name": "Get Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://marketplace-mt-v2.singularitynet.io/org/:org_id",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique organization identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific AI service provider organization."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Services",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Organization Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://marketplace-mt-v2.singularitynet.io/org/:org_id/service",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique organization identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve all AI services published by a specific organization."
+        },
+        {
+          "info": {
+            "name": "List Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://marketplace-mt-v2.singularitynet.io/service",
+            "params": [
+              {
+                "name": "search_string",
+                "value": "",
+                "type": "query",
+                "description": "Text search across service names and descriptions"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Filter services by tag"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve all AI services available on the SingularityNET Marketplace with optional filtering."
+        },
+        {
+          "info": {
+            "name": "Get Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://marketplace-mt-v2.singularitynet.io/org/:org_id/service/:service_id",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "path",
+                "description": "Organization identifier"
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "Service identifier within the organization"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed metadata for a specific AI service including pricing, endpoints, and API specification location."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Service Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Service Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://marketplace-mt-v2.singularitynet.io/org/:org_id/service/:service_id/group",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve endpoint groups for a service. Each group represents a set of daemon endpoints with associated payment channel configuration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Channels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Open Payment Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://marketplace-mt-v2.singularitynet.io/channel/open",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Open a Multi-Party Escrow (MPE) payment channel to fund AI service calls. Channels are funded with ASI tokens."
+        },
+        {
+          "info": {
+            "name": "Get Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://marketplace-mt-v2.singularitynet.io/channel/:channel_id",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path",
+                "description": "Payment channel identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve the current state of a payment channel including balance and expiration."
+        },
+        {
+          "info": {
+            "name": "Extend Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://marketplace-mt-v2.singularitynet.io/channel/:channel_id/extend",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add funds or extend the expiration of an existing payment channel."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,88 +1,87 @@
-# SingularityNET
+# SingularityNET (singularity-net)
 
-SingularityNET is a decentralized AI services marketplace built on blockchain. Developers can publish AI services to the network and consumers can access them using the ASI (FET) token. The platform uses a daemon (snetd) that exposes AI applications as gRPC APIs accessible through the SingularityNET Network.
+SingularityNET is a decentralized AI services marketplace built on blockchain. Developers can publish AI services to the network and consumers can access them using the ASI (FET) token. The platform uses a daemon (snetd) that exposes AI applications as gRPC APIs accessible through the SingularityNET Network, with a REST API for marketplace interaction and service discovery.
 
-- **Website:** https://singularitynet.io
-- **Developer Portal:** https://dev.singularitynet.io
-- **AI Marketplace:** https://marketplace.singularitynet.io
-- **Whitepaper:** https://public.singularitynet.io/whitepaper.pdf
-- **GitHub:** https://github.com/singnet
-- **Daemon (snetd):** https://github.com/singnet/snet-daemon
-- **Python SDK:** https://github.com/singnet/snet-sdk-python
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/singularity-net/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/singularity-net/refs/heads/main/apis.yml)
 
-## Architecture
+## Tags
 
-SingularityNET uses a layered architecture:
-1. **Blockchain (Ethereum):** Registry smart contract stores organization/service metadata URIs; MPE contract manages payment channels
-2. **IPFS:** Distributed storage for service metadata and gRPC proto specifications
-3. **Daemon (snetd):** Wraps AI services, handles auth/payment, proxies gRPC calls
-4. **Marketplace REST API:** Service discovery and metadata access (no auth required for read operations)
+- Artificial Intelligence
+- Blockchain
+- Decentralized AI
+- AI Marketplace
+- Web3
+
+## Timestamps
+
+- **Created:** 2026-05-02
+- **Modified:** 2026-05-02
 
 ## APIs
 
-| Name | Base URL |
-|---|---|
-| Marketplace API | https://marketplace-mt-v2.singularitynet.io |
-| Daemon gRPC | Per-service endpoint (retrieved from service groups) |
+### SingularityNET Daemon API
 
-## OpenAPI Specs
+The SingularityNET Daemon (snetd) exposes an AI service as an API accessible through the SingularityNET Network. The daemon handles blockchain interaction for payment authorization using Multi-Party Escrow (MPE) contracts and routes API calls to the underlying AI service via gRPC.
 
-| Name | Description |
-|---|---|
-| [Marketplace API](openapi/singularitynet-marketplace-openapi.yml) | REST API for service discovery, organizations, and payment channels |
+- **Human URL:** [https://dev.singularitynet.io/docs/products/DecentralizedAIPlatform/Daemon/daemon-api/](https://dev.singularitynet.io/docs/products/DecentralizedAIPlatform/Daemon/daemon-api/)
+- **Base URL:** `https://services.singularitynet.io`
 
-## Capabilities
+#### Tags
 
-### Shared Definitions
+- AI Services
+- gRPC
+- Blockchain
+- Payment Channels
+- Daemon
 
-| File | Description |
-|---|---|
-| [singularitynet-marketplace](capabilities/shared/singularitynet-marketplace.yaml) | SingularityNET Marketplace REST API consumed definition |
+#### Properties
 
-### Workflow Capabilities
+- [Documentation](https://dev.singularitynet.io/docs/products/DecentralizedAIPlatform/Daemon/daemon-api/)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/singularity-net/refs/heads/main/openapi/singularitynet-marketplace-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [GitHub Organization](https://github.com/singnet)
+- [Daemon Git Hub](https://github.com/singnet/snet-daemon)
+- [Python S D K](https://github.com/singnet/snet-sdk-python)
+- [Authentication](https://dev.singularitynet.io/docs/products/DecentralizedAIPlatform/SDK/sdk-concept/)
+- [Spectral Rules](https://raw.githubusercontent.com/api-evangelist/singularity-net/refs/heads/main/rules/singularitynet-rules.yml)
+- [Postman Collection](collections/singularitynet-marketplace.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/singularitynet-marketplace.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
-| Capability | Description |
-|---|---|
-| [AI Service Discovery](capabilities/ai-service-discovery.yaml) | Browse organizations, discover AI services, manage payment channels |
+### SingularityNET Marketplace API
 
-## Rules
+The SingularityNET AI Marketplace REST API provides service discovery, organization management, and metadata access for the decentralized AI network. Allows consumers to browse available AI services, retrieve service metadata, and access pricing information.
 
-| Name | Description |
-|---|---|
-| [SingularityNET Spectral Rules](rules/singularitynet-rules.yml) | Spectral ruleset enforcing SingularityNET API conventions |
+- **Human URL:** [https://dev.singularitynet.io/docs/products/AIMarketplace/](https://dev.singularitynet.io/docs/products/AIMarketplace/)
+- **Base URL:** `https://marketplace.singularitynet.io`
 
-## JSON Schema
+#### Tags
 
-| Name | Description |
-|---|---|
-| [Service Schema](json-schema/singularitynet-service-schema.json) | Schema for SingularityNET AI Service resource |
+- AI Marketplace
+- Service Discovery
+- Organizations
+- Metadata
 
-## JSON Structure
+#### Properties
 
-| Name | Description |
-|---|---|
-| [Service Structure](json-structure/singularitynet-service-structure.json) | Structural documentation for Organization, Service, ServiceGroup, PaymentChannel |
+- [Documentation](https://dev.singularitynet.io/docs/products/AIMarketplace/)
+- [GitHub Organization](https://github.com/singnet)
+- [Postman Collection](collections/singularitynet-marketplace.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/singularitynet-marketplace.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
-## JSON-LD
+## Common Properties
 
-| Name | Description |
-|---|---|
-| [SingularityNET Context](json-ld/singularitynet-context.jsonld) | JSON-LD context mapping SingularityNET terms to schema.org |
-
-## Examples
-
-| Name | Description |
-|---|---|
-| [List Services](examples/singularitynet-list-services-example.json) | Example: searching AI services on the marketplace |
-
-## Vocabulary
-
-| Name | Description |
-|---|---|
-| [SingularityNET Vocabulary](vocabulary/singularitynet-vocabulary.yml) | Domain terms for the decentralized AI marketplace |
+- [LinkedIn](https://www.linkedin.com/company/singularitynet)
+- [GitHub Organization](https://github.com/singnet)
+- [Developer Portal](https://dev.singularitynet.io)
+- [Documentation](https://dev.singularitynet.io/docs/products/DecentralizedAIPlatform/)
+- [A I Marketplace](https://marketplace.singularitynet.io)
+- [Whitepaper](https://public.singularitynet.io/whitepaper.pdf)
+- [Python S D K](https://github.com/singnet/snet-sdk-python)
+- [Daemon Git Hub](https://github.com/singnet/snet-daemon)
+- [Terms of Service](https://singularitynet.io/terms-of-service)
+- [Privacy Policy](https://singularitynet.io/privacy-policy)
 
 ## Maintainers
 
-**API Evangelist**
-- URL: https://apievangelist.com
-- Email: info@apievangelist.com
+**FN:** API Evangelist
+**Email:** info@apievangelist.com
+**URL:** https://apievangelist.com

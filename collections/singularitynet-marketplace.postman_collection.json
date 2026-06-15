@@ -1,0 +1,1084 @@
+{
+  "item": [
+    {
+      "id": "f24ad3b2-7754-49dd-85d1-3689c17d7680",
+      "name": "Organizations",
+      "description": {
+        "content": "AI service provider organization management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8f6a47e9-ad53-4199-96fc-a4aa300a4d06",
+          "name": "List Organizations",
+          "request": {
+            "name": "List Organizations",
+            "description": {
+              "content": "Retrieve all registered organizations on the SingularityNET network that publish AI services.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "org"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Number of organizations to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c6a87a2-dfde-4b92-a403-c82d6761c724",
+              "name": "List of organizations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "org"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"org_id\": \"string\",\n      \"org_name\": \"string\",\n      \"org_type\": \"organization\",\n      \"description\": \"string\",\n      \"short_description\": \"string\",\n      \"url\": \"string\",\n      \"contacts\": [\n        {\n          \"contact_type\": \"technical\",\n          \"email\": \"c3XwVNcj4qMYOmJ@wENiYAsjXkMpDdwZyKnkTeGouaRljcm.zvcn\",\n          \"phone\": \"string\"\n        },\n        {\n          \"contact_type\": \"support\",\n          \"email\": \"MDZS@fuamjErrpGoKaW.loah\",\n          \"phone\": \"string\"\n        }\n      ],\n      \"assets\": {\n        \"hero_image\": {\n          \"url\": \"string\",\n          \"ipfs_hash\": \"string\"\n        }\n      },\n      \"metadata_uri\": \"string\",\n      \"service_count\": 1197\n    },\n    {\n      \"org_id\": \"string\",\n      \"org_name\": \"string\",\n      \"org_type\": \"organization\",\n      \"description\": \"string\",\n      \"short_description\": \"string\",\n      \"url\": \"string\",\n      \"contacts\": [\n        {\n          \"contact_type\": \"general\",\n          \"email\": \"Zawfc@MeJcBKjaSvrmjkwvkKAxkyBuI.wfpo\",\n          \"phone\": \"string\"\n        },\n        {\n          \"contact_type\": \"support\",\n          \"email\": \"zCb1uyUziTXe@NufJCQveAlboeONiEGVxNFqJMkd.fyp\",\n          \"phone\": \"string\"\n        }\n      ],\n      \"assets\": {\n        \"hero_image\": {\n          \"url\": \"string\",\n          \"ipfs_hash\": \"string\"\n        }\n      },\n      \"metadata_uri\": \"string\",\n      \"service_count\": 4351\n    }\n  ],\n  \"total\": 9743\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62681549-0bac-4653-b637-e41c17e48e48",
+          "name": "Get Organization",
+          "request": {
+            "name": "Get Organization",
+            "description": {
+              "content": "Retrieve detailed information about a specific AI service provider organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "org",
+                ":org_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_id",
+                  "description": "(Required) Unique organization identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77909135-35d1-46f0-8c35-afce7acc42e9",
+              "name": "Organization details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "org",
+                    ":org_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) Unique organization identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"org_id\": \"string\",\n    \"org_name\": \"string\",\n    \"org_type\": \"individual\",\n    \"description\": \"string\",\n    \"short_description\": \"string\",\n    \"url\": \"string\",\n    \"contacts\": [\n      {\n        \"contact_type\": \"technical\",\n        \"email\": \"AXttphq@VJHHNeESzAewHXbCRu.wzj\",\n        \"phone\": \"string\"\n      },\n      {\n        \"contact_type\": \"general\",\n        \"email\": \"4YEdLlkY1GYURI2@hjHrLZlWu.tarf\",\n        \"phone\": \"string\"\n      }\n    ],\n    \"assets\": {\n      \"hero_image\": {\n        \"url\": \"string\",\n        \"ipfs_hash\": \"string\"\n      }\n    },\n    \"metadata_uri\": \"string\",\n    \"service_count\": 6274\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94546b34-0abf-4aa3-92a5-774a3b122716",
+              "name": "Organization not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "org",
+                    ":org_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) Unique organization identifier"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "a1eed2b9-fd11-4919-9588-7d5fef10ef29",
+      "name": "Services",
+      "description": {
+        "content": "AI service discovery and metadata",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5b951a2c-52c5-426f-90f1-3411f51d13ec",
+          "name": "List Organization Services",
+          "request": {
+            "name": "List Organization Services",
+            "description": {
+              "content": "Retrieve all AI services published by a specific organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "org",
+                ":org_id",
+                "service"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_id",
+                  "description": "(Required) Unique organization identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "98508cbf-5e44-4cd1-902b-cf300b7f2047",
+              "name": "List of services",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "org",
+                    ":org_id",
+                    "service"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) Unique organization identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"org_id\": \"string\",\n      \"service_id\": \"string\",\n      \"display_name\": \"string\",\n      \"short_description\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rating\": {\n        \"total_users_rated\": 236,\n        \"average_rating\": 4526.492511965479\n      },\n      \"is_available\": true\n    },\n    {\n      \"org_id\": \"string\",\n      \"service_id\": \"string\",\n      \"display_name\": \"string\",\n      \"short_description\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rating\": {\n        \"total_users_rated\": 7496,\n        \"average_rating\": 3239.4060594035036\n      },\n      \"is_available\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7f60c76-4d89-4cfd-bc31-98bbf272b8b5",
+          "name": "List Services",
+          "request": {
+            "name": "List Services",
+            "description": {
+              "content": "Retrieve all AI services available on the SingularityNET Marketplace with optional filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search_string",
+                  "value": "<string>",
+                  "description": "Text search across service names and descriptions"
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "Filter services by tag"
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "Filter services by tag"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3472c664-f450-4981-befe-0b50c977001e",
+              "name": "List of AI services",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search_string",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"org_id\": \"string\",\n      \"service_id\": \"string\",\n      \"display_name\": \"string\",\n      \"short_description\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rating\": {\n        \"total_users_rated\": 6522,\n        \"average_rating\": 4655.942470522248\n      },\n      \"is_available\": false\n    },\n    {\n      \"org_id\": \"string\",\n      \"service_id\": \"string\",\n      \"display_name\": \"string\",\n      \"short_description\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rating\": {\n        \"total_users_rated\": 9686,\n        \"average_rating\": 9064.06046171646\n      },\n      \"is_available\": false\n    }\n  ],\n  \"total\": 9255\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d4152a9-01cd-442d-a18f-72facb283dc3",
+          "name": "Get Service",
+          "request": {
+            "name": "Get Service",
+            "description": {
+              "content": "Retrieve detailed metadata for a specific AI service including pricing, endpoints, and API specification location.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "org",
+                ":org_id",
+                "service",
+                ":service_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_id",
+                  "description": "(Required) Organization identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "service_id",
+                  "description": "(Required) Service identifier within the organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "14e4ee88-98f5-4ee1-82c1-63ae4d441d63",
+              "name": "Service details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "org",
+                    ":org_id",
+                    "service",
+                    ":service_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) Organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "service_id",
+                      "description": "(Required) Service identifier within the organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"org_id\": \"string\",\n    \"service_id\": \"string\",\n    \"display_name\": \"string\",\n    \"short_description\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"rating\": {\n      \"total_users_rated\": 8189,\n      \"average_rating\": 1969.4719236627623\n    },\n    \"is_available\": false,\n    \"description\": \"string\",\n    \"url\": \"string\",\n    \"contributors\": [\n      {\n        \"name\": \"string\",\n        \"email\": \"mf5gQ@Aq.hb\"\n      },\n      {\n        \"name\": \"string\",\n        \"email\": \"HetB@MidWcpIJyXaHAEzOSpz.nm\"\n      }\n    ],\n    \"groups\": [\n      {\n        \"group_id\": \"string\",\n        \"group_name\": \"string\",\n        \"pricing\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"endpoints\": [\n          {\n            \"endpoint\": \"string\"\n          },\n          {\n            \"endpoint\": \"string\"\n          }\n        ],\n        \"payment\": {\n          \"payment_address\": \"string\",\n          \"payment_expiration_threshold\": 8710,\n          \"payment_channel_storage_type\": \"string\"\n        }\n      },\n      {\n        \"group_id\": \"string\",\n        \"group_name\": \"string\",\n        \"pricing\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"endpoints\": [\n          {\n            \"endpoint\": \"string\"\n          },\n          {\n            \"endpoint\": \"string\"\n          }\n        ],\n        \"payment\": {\n          \"payment_address\": \"string\",\n          \"payment_expiration_threshold\": 454,\n          \"payment_channel_storage_type\": \"string\"\n        }\n      }\n    ],\n    \"service_api_source\": \"string\",\n    \"metadata_uri\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cae6798b-7af5-4d2d-b1d4-5564957e165c",
+              "name": "Service not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "org",
+                    ":org_id",
+                    "service",
+                    ":service_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) Organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "service_id",
+                      "description": "(Required) Service identifier within the organization"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5a414ebb-41fe-4a8a-aa79-90c4c18ab4f3",
+      "name": "Service Groups",
+      "description": {
+        "content": "Service endpoint group management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7c486ddc-9d39-4147-aff8-fcc6da80bb29",
+          "name": "List Service Groups",
+          "request": {
+            "name": "List Service Groups",
+            "description": {
+              "content": "Retrieve endpoint groups for a service. Each group represents a set of daemon endpoints with associated payment channel configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "org",
+                ":org_id",
+                "service",
+                ":service_id",
+                "group"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "service_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4db87d5b-aada-406a-9a03-20c436168bfe",
+              "name": "Service endpoint groups",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "org",
+                    ":org_id",
+                    "service",
+                    ":service_id",
+                    "group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "service_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"group_id\": \"string\",\n      \"group_name\": \"string\",\n      \"pricing\": [\n        {\n          \"price_model\": \"fixed_price\",\n          \"price_in_cogs\": 3702,\n          \"default\": true\n        },\n        {\n          \"price_model\": \"fixed_price\",\n          \"price_in_cogs\": 8252,\n          \"default\": true\n        }\n      ],\n      \"endpoints\": [\n        {\n          \"endpoint\": \"string\"\n        },\n        {\n          \"endpoint\": \"string\"\n        }\n      ],\n      \"payment\": {\n        \"payment_address\": \"string\",\n        \"payment_expiration_threshold\": 4379,\n        \"payment_channel_storage_type\": \"string\"\n      }\n    },\n    {\n      \"group_id\": \"string\",\n      \"group_name\": \"string\",\n      \"pricing\": [\n        {\n          \"price_model\": \"fixed_price_per_kilo_bytes\",\n          \"price_in_cogs\": 8879,\n          \"default\": true\n        },\n        {\n          \"price_model\": \"fixed_price_per_kilo_bytes\",\n          \"price_in_cogs\": 9685,\n          \"default\": true\n        }\n      ],\n      \"endpoints\": [\n        {\n          \"endpoint\": \"string\"\n        },\n        {\n          \"endpoint\": \"string\"\n        }\n      ],\n      \"payment\": {\n        \"payment_address\": \"string\",\n        \"payment_expiration_threshold\": 5506,\n        \"payment_channel_storage_type\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "691fde7c-042e-44ba-965b-c0b912935d75",
+      "name": "Channels",
+      "description": {
+        "content": "Payment channel management for service access",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5c935716-23f4-41d4-a0e5-e58f3f599ff6",
+          "name": "Open Payment Channel",
+          "request": {
+            "name": "Open Payment Channel",
+            "description": {
+              "content": "Open a Multi-Party Escrow (MPE) payment channel to fund AI service calls. Channels are funded with ASI tokens.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "channel",
+                "open"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"org_id\": \"<string>\",\n  \"service_id\": \"<string>\",\n  \"group_id\": \"<string>\",\n  \"amount_in_cogs\": \"<string>\",\n  \"expiration\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e315d80d-a607-4e6c-8891-a32825b69ec7",
+              "name": "Payment channel opened",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "channel",
+                    "open"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"org_id\": \"<string>\",\n  \"service_id\": \"<string>\",\n  \"group_id\": \"<string>\",\n  \"amount_in_cogs\": \"<string>\",\n  \"expiration\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"channel_id\": \"string\",\n    \"nonce\": 6674,\n    \"balance_in_cogs\": \"string\",\n    \"pending\": \"string\",\n    \"endpoint\": \"string\",\n    \"expiration\": 2180,\n    \"signer\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "889a8d94-95d1-4830-a6d7-e893990c81f6",
+          "name": "Get Channel",
+          "request": {
+            "name": "Get Channel",
+            "description": {
+              "content": "Retrieve the current state of a payment channel including balance and expiration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "channel",
+                ":channel_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "channel_id",
+                  "description": "(Required) Payment channel identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de75b7f8-813b-4444-a7d8-4fa375788657",
+              "name": "Channel details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "channel",
+                    ":channel_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) Payment channel identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"channel_id\": \"string\",\n    \"nonce\": 6674,\n    \"balance_in_cogs\": \"string\",\n    \"pending\": \"string\",\n    \"endpoint\": \"string\",\n    \"expiration\": 2180,\n    \"signer\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97207867-8969-46a8-9e54-23e9c9b6eef0",
+              "name": "Channel not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "channel",
+                    ":channel_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) Payment channel identifier"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3e4d6df-8d30-44bc-812a-15c81f3b13dd",
+          "name": "Extend Channel",
+          "request": {
+            "name": "Extend Channel",
+            "description": {
+              "content": "Add funds or extend the expiration of an existing payment channel.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "channel",
+                ":channel_id",
+                "extend"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "channel_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<string>\",\n  \"expiration\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3478ae52-5b82-4dee-831f-92047e0eb8b0",
+              "name": "Channel extended",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "channel",
+                    ":channel_id",
+                    "extend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<string>\",\n  \"expiration\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"channel_id\": \"string\",\n    \"nonce\": 6674,\n    \"balance_in_cogs\": \"string\",\n    \"pending\": \"string\",\n    \"endpoint\": \"string\",\n    \"expiration\": 2180,\n    \"signer\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://marketplace-mt-v2.singularitynet.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b5e3cf89-2345-4fe0-ad9e-37c1f1ace79d",
+    "name": "SingularityNET Marketplace API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The SingularityNET Marketplace REST API provides service discovery, organization management, and metadata access for the decentralized AI network. Browse available AI services, retrieve service metadata, check pricing, and access organization information. Service invocation uses gRPC through the daemon (snetd).\n\nContact Support:\n Name: SingularityNET Foundation",
+      "type": "text/plain"
+    }
+  }
+}
