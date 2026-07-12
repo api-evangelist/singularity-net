@@ -57,6 +57,10 @@ apis:
     - type: GitHubOrganization
       url: https://github.com/singnet
 common:
+  - type: DomainSecurity
+    url: security/singularity-net-domain-security.yml
+  - url: https://www.singularitynet.io/feed
+    type: Blog
   - type: LinkedIn
     url: https://www.linkedin.com/company/singularitynet
   - type: GitHubOrganization
