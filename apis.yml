@@ -57,6 +57,8 @@ apis:
     - type: GitHubOrganization
       url: https://github.com/singnet
 common:
+  - type: AgenticAccess
+    url: agentic-access/singularity-net-agentic-access.yml
   - type: DomainSecurity
     url: security/singularity-net-domain-security.yml
   - url: https://www.singularitynet.io/feed
