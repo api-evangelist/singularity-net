@@ -1,0 +1,98 @@
+openapi: 3.0.3
+info:
+  title: SingularityNET Marketplace Channels Service Groups API
+  description: The SingularityNET Marketplace REST API provides service discovery, organization management, and metadata access for the decentralized AI network. Browse available AI services, retrieve service metadata, check pricing, and access organization information. Service invocation uses gRPC through the daemon (snetd).
+  version: '1.0'
+  contact:
+    name: SingularityNET Foundation
+    url: https://singularitynet.io
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://marketplace-mt-v2.singularitynet.io
+  description: Marketplace Production API
+tags:
+- name: Service Groups
+  description: Service endpoint group management
+paths:
+  /org/{org_id}/service/{service_id}/group:
+    get:
+      operationId: listServiceGroups
+      summary: List Service Groups
+      description: Retrieve endpoint groups for a service. Each group represents a set of daemon endpoints with associated payment channel configuration.
+      tags:
+      - Service Groups
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: service_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Service endpoint groups
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ServiceGroup'
+components:
+  schemas:
+    ServiceGroup:
+      type: object
+      properties:
+        group_id:
+          type: string
+          description: Group identifier hash
+        group_name:
+          type: string
+        pricing:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pricing'
+        endpoints:
+          type: array
+          items:
+            type: object
+            properties:
+              endpoint:
+                type: string
+                description: gRPC daemon endpoint URL
+          description: Daemon gRPC endpoints for this group
+        payment:
+          type: object
+          properties:
+            payment_address:
+              type: string
+              description: Ethereum wallet address for payments
+            payment_expiration_threshold:
+              type: integer
+            payment_channel_storage_type:
+              type: string
+    Pricing:
+      type: object
+      properties:
+        price_model:
+          type: string
+          enum:
+          - fixed_price
+          - fixed_price_per_kilo_bytes
+          description: Pricing model
+        price_in_cogs:
+          type: integer
+          description: Price per call in cogs (1 ASI = 10^8 cogs)
+        default:
+          type: boolean
+externalDocs:
+  description: SingularityNET Developer Portal
+  url: https://dev.singularitynet.io

@@ -1,0 +1,142 @@
+openapi: 3.0.3
+info:
+  title: SingularityNET Marketplace Channels Organizations API
+  description: The SingularityNET Marketplace REST API provides service discovery, organization management, and metadata access for the decentralized AI network. Browse available AI services, retrieve service metadata, check pricing, and access organization information. Service invocation uses gRPC through the daemon (snetd).
+  version: '1.0'
+  contact:
+    name: SingularityNET Foundation
+    url: https://singularitynet.io
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://marketplace-mt-v2.singularitynet.io
+  description: Marketplace Production API
+tags:
+- name: Organizations
+  description: AI service provider organization management
+paths:
+  /org:
+    get:
+      operationId: listOrganizations
+      summary: List Organizations
+      description: Retrieve all registered organizations on the SingularityNET network that publish AI services.
+      tags:
+      - Organizations
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 25
+          maximum: 100
+        description: Number of organizations to return
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
+        description: Pagination offset
+      responses:
+        '200':
+          description: List of organizations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Organization'
+                  total:
+                    type: integer
+  /org/{org_id}:
+    get:
+      operationId: getOrganization
+      summary: Get Organization
+      description: Retrieve detailed information about a specific AI service provider organization.
+      tags:
+      - Organizations
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique organization identifier
+      responses:
+        '200':
+          description: Organization details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Organization'
+        '404':
+          description: Organization not found
+components:
+  schemas:
+    Organization:
+      type: object
+      properties:
+        org_id:
+          type: string
+          description: Unique organization identifier
+        org_name:
+          type: string
+          description: Human-readable organization name
+        org_type:
+          type: string
+          enum:
+          - individual
+          - organization
+        description:
+          type: string
+        short_description:
+          type: string
+        url:
+          type: string
+          description: Organization website URL
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+        assets:
+          type: object
+          properties:
+            hero_image:
+              $ref: '#/components/schemas/Asset'
+        metadata_uri:
+          type: string
+          description: IPFS URI for organization metadata
+        service_count:
+          type: integer
+    Contact:
+      type: object
+      properties:
+        contact_type:
+          type: string
+          enum:
+          - general
+          - support
+          - technical
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+    Asset:
+      type: object
+      properties:
+        url:
+          type: string
+          description: Direct URL to the asset
+        ipfs_hash:
+          type: string
+          description: IPFS content hash
+externalDocs:
+  description: SingularityNET Developer Portal
+  url: https://dev.singularitynet.io

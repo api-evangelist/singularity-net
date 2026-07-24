@@ -1,0 +1,153 @@
+openapi: 3.0.3
+info:
+  title: SingularityNET Marketplace Channels API
+  description: The SingularityNET Marketplace REST API provides service discovery, organization management, and metadata access for the decentralized AI network. Browse available AI services, retrieve service metadata, check pricing, and access organization information. Service invocation uses gRPC through the daemon (snetd).
+  version: '1.0'
+  contact:
+    name: SingularityNET Foundation
+    url: https://singularitynet.io
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://marketplace-mt-v2.singularitynet.io
+  description: Marketplace Production API
+tags:
+- name: Channels
+  description: Payment channel management for service access
+paths:
+  /channel/open:
+    post:
+      operationId: openPaymentChannel
+      summary: Open Payment Channel
+      description: Open a Multi-Party Escrow (MPE) payment channel to fund AI service calls. Channels are funded with ASI tokens.
+      tags:
+      - Channels
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelOpenRequest'
+      responses:
+        '200':
+          description: Payment channel opened
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/PaymentChannel'
+  /channel/{channel_id}:
+    get:
+      operationId: getChannel
+      summary: Get Channel
+      description: Retrieve the current state of a payment channel including balance and expiration.
+      tags:
+      - Channels
+      parameters:
+      - name: channel_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Payment channel identifier
+      responses:
+        '200':
+          description: Channel details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/PaymentChannel'
+        '404':
+          description: Channel not found
+  /channel/{channel_id}/extend:
+    post:
+      operationId: extendChannel
+      summary: Extend Channel
+      description: Add funds or extend the expiration of an existing payment channel.
+      tags:
+      - Channels
+      parameters:
+      - name: channel_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: string
+                  description: Additional ASI tokens to deposit (in cogs)
+                expiration:
+                  type: integer
+                  description: New expiration block number
+      responses:
+        '200':
+          description: Channel extended
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/PaymentChannel'
+components:
+  schemas:
+    PaymentChannel:
+      type: object
+      properties:
+        channel_id:
+          type: string
+          description: Payment channel identifier
+        nonce:
+          type: integer
+          description: Current channel nonce
+        balance_in_cogs:
+          type: string
+          description: Available balance in cogs
+        pending:
+          type: string
+          description: Pending balance commitment
+        endpoint:
+          type: string
+          description: Associated service endpoint
+        expiration:
+          type: integer
+          description: Channel expiration block number
+        signer:
+          type: string
+          description: Ethereum address of channel signer
+    ChannelOpenRequest:
+      type: object
+      required:
+      - org_id
+      - service_id
+      - group_id
+      - amount_in_cogs
+      - expiration
+      properties:
+        org_id:
+          type: string
+        service_id:
+          type: string
+        group_id:
+          type: string
+        amount_in_cogs:
+          type: string
+          description: Amount of ASI tokens to deposit (in cogs)
+        expiration:
+          type: integer
+          description: Channel expiration block number
+externalDocs:
+  description: SingularityNET Developer Portal
+  url: https://dev.singularitynet.io

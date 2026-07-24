@@ -1,0 +1,231 @@
+openapi: 3.0.3
+info:
+  title: SingularityNET Marketplace Channels Services API
+  description: The SingularityNET Marketplace REST API provides service discovery, organization management, and metadata access for the decentralized AI network. Browse available AI services, retrieve service metadata, check pricing, and access organization information. Service invocation uses gRPC through the daemon (snetd).
+  version: '1.0'
+  contact:
+    name: SingularityNET Foundation
+    url: https://singularitynet.io
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://marketplace-mt-v2.singularitynet.io
+  description: Marketplace Production API
+tags:
+- name: Services
+  description: AI service discovery and metadata
+paths:
+  /org/{org_id}/service:
+    get:
+      operationId: listOrgServices
+      summary: List Organization Services
+      description: Retrieve all AI services published by a specific organization.
+      tags:
+      - Services
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique organization identifier
+      responses:
+        '200':
+          description: List of services
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Service'
+  /service:
+    get:
+      operationId: listServices
+      summary: List Services
+      description: Retrieve all AI services available on the SingularityNET Marketplace with optional filtering.
+      tags:
+      - Services
+      parameters:
+      - name: search_string
+        in: query
+        schema:
+          type: string
+        description: Text search across service names and descriptions
+      - name: tags
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+        explode: true
+        description: Filter services by tag
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 25
+          maximum: 100
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: List of AI services
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Service'
+                  total:
+                    type: integer
+  /org/{org_id}/service/{service_id}:
+    get:
+      operationId: getService
+      summary: Get Service
+      description: Retrieve detailed metadata for a specific AI service including pricing, endpoints, and API specification location.
+      tags:
+      - Services
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Organization identifier
+      - name: service_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Service identifier within the organization
+      responses:
+        '200':
+          description: Service details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/ServiceDetail'
+        '404':
+          description: Service not found
+components:
+  schemas:
+    Service:
+      type: object
+      properties:
+        org_id:
+          type: string
+        service_id:
+          type: string
+          description: Service identifier within the organization
+        display_name:
+          type: string
+        short_description:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        rating:
+          type: object
+          properties:
+            total_users_rated:
+              type: integer
+            average_rating:
+              type: number
+              format: float
+        media:
+          type: array
+          items:
+            type: object
+        is_available:
+          type: boolean
+    ServiceGroup:
+      type: object
+      properties:
+        group_id:
+          type: string
+          description: Group identifier hash
+        group_name:
+          type: string
+        pricing:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pricing'
+        endpoints:
+          type: array
+          items:
+            type: object
+            properties:
+              endpoint:
+                type: string
+                description: gRPC daemon endpoint URL
+          description: Daemon gRPC endpoints for this group
+        payment:
+          type: object
+          properties:
+            payment_address:
+              type: string
+              description: Ethereum wallet address for payments
+            payment_expiration_threshold:
+              type: integer
+            payment_channel_storage_type:
+              type: string
+    ServiceDetail:
+      allOf:
+      - $ref: '#/components/schemas/Service'
+      - type: object
+        properties:
+          description:
+            type: string
+          url:
+            type: string
+          contributors:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+          groups:
+            type: array
+            items:
+              $ref: '#/components/schemas/ServiceGroup'
+          service_api_source:
+            type: string
+            description: IPFS URI to the service proto/API specification
+          metadata_uri:
+            type: string
+    Pricing:
+      type: object
+      properties:
+        price_model:
+          type: string
+          enum:
+          - fixed_price
+          - fixed_price_per_kilo_bytes
+          description: Pricing model
+        price_in_cogs:
+          type: integer
+          description: Price per call in cogs (1 ASI = 10^8 cogs)
+        default:
+          type: boolean
+externalDocs:
+  description: SingularityNET Developer Portal
+  url: https://dev.singularitynet.io
