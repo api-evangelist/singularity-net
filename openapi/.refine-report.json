@@ -1,0 +1,20 @@
+{
+  "provider": "singularity-net",
+  "sources": [
+    "singularity-net-channels-api-openapi.yml",
+    "singularity-net-organizations-api-openapi.yml",
+    "singularity-net-service-groups-api-openapi.yml",
+    "singularity-net-services-api-openapi.yml"
+  ],
+  "outputs": [
+    "singularity-net-channels-api-openapi.yml",
+    "singularity-net-organizations-api-openapi.yml",
+    "singularity-net-service-groups-api-openapi.yml",
+    "singularity-net-services-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
