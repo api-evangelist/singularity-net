@@ -1,0 +1,362 @@
+{
+  "item": [
+    {
+      "id": "1144331f-cf28-44b5-9e54-0d6ff6a55e7c",
+      "name": "Channels",
+      "description": {
+        "content": "Payment channel management for service access",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9f82443e-d6d4-4387-8bc8-8ffbbf7c55c7",
+          "name": "Open Payment Channel",
+          "request": {
+            "name": "Open Payment Channel",
+            "description": {
+              "content": "Open a Multi-Party Escrow (MPE) payment channel to fund AI service calls. Channels are funded with ASI tokens.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "channel",
+                "open"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"org_id\": \"<string>\",\n  \"service_id\": \"<string>\",\n  \"group_id\": \"<string>\",\n  \"amount_in_cogs\": \"<string>\",\n  \"expiration\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b91343a2-13d5-452e-88a2-2dea9aa56cd7",
+              "name": "Payment channel opened",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "channel",
+                    "open"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"org_id\": \"<string>\",\n  \"service_id\": \"<string>\",\n  \"group_id\": \"<string>\",\n  \"amount_in_cogs\": \"<string>\",\n  \"expiration\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"channel_id\": \"string\",\n    \"nonce\": 5881,\n    \"balance_in_cogs\": \"string\",\n    \"pending\": \"string\",\n    \"endpoint\": \"string\",\n    \"expiration\": 7266,\n    \"signer\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "24990d81-18f3-492b-932a-baf72545e840",
+          "name": "Get Channel",
+          "request": {
+            "name": "Get Channel",
+            "description": {
+              "content": "Retrieve the current state of a payment channel including balance and expiration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "channel",
+                ":channel_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "channel_id",
+                  "description": "(Required) Payment channel identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c4a5947a-2cb7-4dbe-be73-b2252dc85583",
+              "name": "Channel details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "channel",
+                    ":channel_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) Payment channel identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"channel_id\": \"string\",\n    \"nonce\": 5881,\n    \"balance_in_cogs\": \"string\",\n    \"pending\": \"string\",\n    \"endpoint\": \"string\",\n    \"expiration\": 7266,\n    \"signer\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "118b4c01-388b-4f32-8aec-3fb0ba2f875a",
+              "name": "Channel not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "channel",
+                    ":channel_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) Payment channel identifier"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "55d88af8-6501-4328-ae6b-c3160ea439cd",
+          "name": "Extend Channel",
+          "request": {
+            "name": "Extend Channel",
+            "description": {
+              "content": "Add funds or extend the expiration of an existing payment channel.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "channel",
+                ":channel_id",
+                "extend"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "channel_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<string>\",\n  \"expiration\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c258a2be-8625-4505-98b7-4ea3c131beeb",
+              "name": "Channel extended",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "channel",
+                    ":channel_id",
+                    "extend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<string>\",\n  \"expiration\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"channel_id\": \"string\",\n    \"nonce\": 5881,\n    \"balance_in_cogs\": \"string\",\n    \"pending\": \"string\",\n    \"endpoint\": \"string\",\n    \"expiration\": 7266,\n    \"signer\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://marketplace-mt-v2.singularitynet.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1a22b866-0ea7-49a3-a043-60a10e1bf0d6",
+    "name": "SingularityNET Marketplace Channels API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The SingularityNET Marketplace REST API provides service discovery, organization management, and metadata access for the decentralized AI network. Browse available AI services, retrieve service metadata, check pricing, and access organization information. Service invocation uses gRPC through the daemon (snetd).\n\nContact Support:\n Name: SingularityNET Foundation",
+      "type": "text/plain"
+    }
+  }
+}

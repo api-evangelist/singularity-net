@@ -1,0 +1,250 @@
+{
+  "item": [
+    {
+      "id": "99dbafef-7e77-4811-92a4-dc7a3090fe07",
+      "name": "Organizations",
+      "description": {
+        "content": "AI service provider organization management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a26a3508-90fc-4bf4-98f8-46cadc1869ce",
+          "name": "List Organizations",
+          "request": {
+            "name": "List Organizations",
+            "description": {
+              "content": "Retrieve all registered organizations on the SingularityNET network that publish AI services.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "org"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Number of organizations to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "21a6c400-a769-471e-90c3-0730a996dfc8",
+              "name": "List of organizations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "org"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"org_id\": \"string\",\n      \"org_name\": \"string\",\n      \"org_type\": \"individual\",\n      \"description\": \"string\",\n      \"short_description\": \"string\",\n      \"url\": \"string\",\n      \"contacts\": [\n        {\n          \"contact_type\": \"technical\",\n          \"email\": \"oAIJyyvbiN@Zpy.dhe\",\n          \"phone\": \"string\"\n        },\n        {\n          \"contact_type\": \"support\",\n          \"email\": \"8fqEw66a7oB@aRpeWWdnsvEGyVSkORDnxFsW.usfc\",\n          \"phone\": \"string\"\n        }\n      ],\n      \"assets\": {\n        \"hero_image\": {\n          \"url\": \"string\",\n          \"ipfs_hash\": \"string\"\n        }\n      },\n      \"metadata_uri\": \"string\",\n      \"service_count\": 3411\n    },\n    {\n      \"org_id\": \"string\",\n      \"org_name\": \"string\",\n      \"org_type\": \"organization\",\n      \"description\": \"string\",\n      \"short_description\": \"string\",\n      \"url\": \"string\",\n      \"contacts\": [\n        {\n          \"contact_type\": \"support\",\n          \"email\": \"OCA2urY1@OiNnh.gr\",\n          \"phone\": \"string\"\n        },\n        {\n          \"contact_type\": \"technical\",\n          \"email\": \"hsDNG6GlH4cC@xbREptdtjzSvXAnzdprZxpvzbIfvxy.li\",\n          \"phone\": \"string\"\n        }\n      ],\n      \"assets\": {\n        \"hero_image\": {\n          \"url\": \"string\",\n          \"ipfs_hash\": \"string\"\n        }\n      },\n      \"metadata_uri\": \"string\",\n      \"service_count\": 1565\n    }\n  ],\n  \"total\": 9552\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "93bc044b-e625-41be-8e6b-1b885ce1eb6e",
+          "name": "Get Organization",
+          "request": {
+            "name": "Get Organization",
+            "description": {
+              "content": "Retrieve detailed information about a specific AI service provider organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "org",
+                ":org_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_id",
+                  "description": "(Required) Unique organization identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f9288aa5-292f-4cc5-8879-bd53669e6d4f",
+              "name": "Organization details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "org",
+                    ":org_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) Unique organization identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"org_id\": \"string\",\n    \"org_name\": \"string\",\n    \"org_type\": \"individual\",\n    \"description\": \"string\",\n    \"short_description\": \"string\",\n    \"url\": \"string\",\n    \"contacts\": [\n      {\n        \"contact_type\": \"support\",\n        \"email\": \"dFT4U6hjbH@OXMWztxgUoZqZhJI.sjy\",\n        \"phone\": \"string\"\n      },\n      {\n        \"contact_type\": \"technical\",\n        \"email\": \"HCmGD4kSPwAJW1@gvusTdObm.ekl\",\n        \"phone\": \"string\"\n      }\n    ],\n    \"assets\": {\n      \"hero_image\": {\n        \"url\": \"string\",\n        \"ipfs_hash\": \"string\"\n      }\n    },\n    \"metadata_uri\": \"string\",\n    \"service_count\": 9751\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71dcd53e-a0fa-4f3c-b5b6-81140442ee12",
+              "name": "Organization not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "org",
+                    ":org_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) Unique organization identifier"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://marketplace-mt-v2.singularitynet.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "42460e5b-4d92-48c6-8d2d-d9c1add7eef2",
+    "name": "SingularityNET Marketplace Channels Organizations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The SingularityNET Marketplace REST API provides service discovery, organization management, and metadata access for the decentralized AI network. Browse available AI services, retrieve service metadata, check pricing, and access organization information. Service invocation uses gRPC through the daemon (snetd).\n\nContact Support:\n Name: SingularityNET Foundation",
+      "type": "text/plain"
+    }
+  }
+}

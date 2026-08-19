@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SingularityNET Marketplace Channels Service Groups API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Service Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Service Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://marketplace-mt-v2.singularitynet.io/org/:org_id/service/:service_id/group",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve endpoint groups for a service. Each group represents a set of daemon endpoints with associated payment channel configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

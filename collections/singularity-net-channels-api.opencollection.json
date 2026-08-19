@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SingularityNET Marketplace Channels API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Channels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Open Payment Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://marketplace-mt-v2.singularitynet.io/channel/open",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Open a Multi-Party Escrow (MPE) payment channel to fund AI service calls. Channels are funded with ASI tokens."
+        },
+        {
+          "info": {
+            "name": "Get Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://marketplace-mt-v2.singularitynet.io/channel/:channel_id",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path",
+                "description": "Payment channel identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve the current state of a payment channel including balance and expiration."
+        },
+        {
+          "info": {
+            "name": "Extend Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://marketplace-mt-v2.singularitynet.io/channel/:channel_id/extend",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add funds or extend the expiration of an existing payment channel."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

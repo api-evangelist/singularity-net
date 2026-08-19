@@ -1,0 +1,395 @@
+{
+  "item": [
+    {
+      "id": "ba7fbbac-2b86-4481-bceb-99c9971c3cee",
+      "name": "Services",
+      "description": {
+        "content": "AI service discovery and metadata",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ef81d354-814b-4368-80f9-70e338f28c57",
+          "name": "List Organization Services",
+          "request": {
+            "name": "List Organization Services",
+            "description": {
+              "content": "Retrieve all AI services published by a specific organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "org",
+                ":org_id",
+                "service"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_id",
+                  "description": "(Required) Unique organization identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "35e698f4-74a2-4fa8-a2e2-f98e9b1f68a1",
+              "name": "List of services",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "org",
+                    ":org_id",
+                    "service"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) Unique organization identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"org_id\": \"string\",\n      \"service_id\": \"string\",\n      \"display_name\": \"string\",\n      \"short_description\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rating\": {\n        \"total_users_rated\": 2107,\n        \"average_rating\": 2592.106500656124\n      },\n      \"is_available\": false\n    },\n    {\n      \"org_id\": \"string\",\n      \"service_id\": \"string\",\n      \"display_name\": \"string\",\n      \"short_description\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rating\": {\n        \"total_users_rated\": 7277,\n        \"average_rating\": 2949.6137360875628\n      },\n      \"is_available\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d49105c7-2542-428c-b673-8447e1160596",
+          "name": "List Services",
+          "request": {
+            "name": "List Services",
+            "description": {
+              "content": "Retrieve all AI services available on the SingularityNET Marketplace with optional filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search_string",
+                  "value": "<string>",
+                  "description": "Text search across service names and descriptions"
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "Filter services by tag"
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "Filter services by tag"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d3e4e72b-554c-4443-894e-3c11ddd07703",
+              "name": "List of AI services",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search_string",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"org_id\": \"string\",\n      \"service_id\": \"string\",\n      \"display_name\": \"string\",\n      \"short_description\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rating\": {\n        \"total_users_rated\": 1439,\n        \"average_rating\": 5123.767075295189\n      },\n      \"is_available\": true\n    },\n    {\n      \"org_id\": \"string\",\n      \"service_id\": \"string\",\n      \"display_name\": \"string\",\n      \"short_description\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rating\": {\n        \"total_users_rated\": 5975,\n        \"average_rating\": 8139.051823961792\n      },\n      \"is_available\": true\n    }\n  ],\n  \"total\": 8790\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82191df0-52d4-460b-b0ec-1284bf6f6a8e",
+          "name": "Get Service",
+          "request": {
+            "name": "Get Service",
+            "description": {
+              "content": "Retrieve detailed metadata for a specific AI service including pricing, endpoints, and API specification location.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "org",
+                ":org_id",
+                "service",
+                ":service_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_id",
+                  "description": "(Required) Organization identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "service_id",
+                  "description": "(Required) Service identifier within the organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fb29d741-8e11-4ed4-9bdd-8b8c4561c24e",
+              "name": "Service details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "org",
+                    ":org_id",
+                    "service",
+                    ":service_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) Organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "service_id",
+                      "description": "(Required) Service identifier within the organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"org_id\": \"string\",\n    \"service_id\": \"string\",\n    \"display_name\": \"string\",\n    \"short_description\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"rating\": {\n      \"total_users_rated\": 6798,\n      \"average_rating\": 7577.78493847012\n    },\n    \"is_available\": true,\n    \"description\": \"string\",\n    \"url\": \"string\",\n    \"contributors\": [\n      {\n        \"name\": \"string\",\n        \"email\": \"r0Ai29kS5weJHr@IFNmfhnMBoxtaHNXIyfRrLqKogjH.okqj\"\n      },\n      {\n        \"name\": \"string\",\n        \"email\": \"XSs9I@bicDqrismnnddKxCqA.rlw\"\n      }\n    ],\n    \"groups\": [\n      {\n        \"group_id\": \"string\",\n        \"group_name\": \"string\",\n        \"pricing\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"endpoints\": [\n          {\n            \"endpoint\": \"string\"\n          },\n          {\n            \"endpoint\": \"string\"\n          }\n        ],\n        \"payment\": {\n          \"payment_address\": \"string\",\n          \"payment_expiration_threshold\": 668,\n          \"payment_channel_storage_type\": \"string\"\n        }\n      },\n      {\n        \"group_id\": \"string\",\n        \"group_name\": \"string\",\n        \"pricing\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"endpoints\": [\n          {\n            \"endpoint\": \"string\"\n          },\n          {\n            \"endpoint\": \"string\"\n          }\n        ],\n        \"payment\": {\n          \"payment_address\": \"string\",\n          \"payment_expiration_threshold\": 2335,\n          \"payment_channel_storage_type\": \"string\"\n        }\n      }\n    ],\n    \"service_api_source\": \"string\",\n    \"metadata_uri\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67b037f8-064b-4f89-b747-0bfa75bfb4f9",
+              "name": "Service not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "org",
+                    ":org_id",
+                    "service",
+                    ":service_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) Organization identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "service_id",
+                      "description": "(Required) Service identifier within the organization"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://marketplace-mt-v2.singularitynet.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6eb40f24-d261-4a8b-9783-db68eb150b27",
+    "name": "SingularityNET Marketplace Channels Services API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The SingularityNET Marketplace REST API provides service discovery, organization management, and metadata access for the decentralized AI network. Browse available AI services, retrieve service metadata, check pricing, and access organization information. Service invocation uses gRPC through the daemon (snetd).\n\nContact Support:\n Name: SingularityNET Foundation",
+      "type": "text/plain"
+    }
+  }
+}

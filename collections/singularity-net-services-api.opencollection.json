@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SingularityNET Marketplace Channels Services API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Services",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Organization Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://marketplace-mt-v2.singularitynet.io/org/:org_id/service",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique organization identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve all AI services published by a specific organization."
+        },
+        {
+          "info": {
+            "name": "List Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://marketplace-mt-v2.singularitynet.io/service",
+            "params": [
+              {
+                "name": "search_string",
+                "value": "",
+                "type": "query",
+                "description": "Text search across service names and descriptions"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Filter services by tag"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve all AI services available on the SingularityNET Marketplace with optional filtering."
+        },
+        {
+          "info": {
+            "name": "Get Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://marketplace-mt-v2.singularitynet.io/org/:org_id/service/:service_id",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "path",
+                "description": "Organization identifier"
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "Service identifier within the organization"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed metadata for a specific AI service including pricing, endpoints, and API specification location."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
