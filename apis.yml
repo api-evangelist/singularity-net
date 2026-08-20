@@ -35,6 +35,11 @@ apis:
   tags:
   - AI Marketplace
   - Service Discovery
+  - Organization
+  - Metadata
+  tags_raw:
+  - AI Marketplace
+  - Service Discovery
   - Organizations
   - Metadata
   properties:
@@ -71,6 +76,8 @@ apis:
   humanURL: https://dev.singularitynet.io/docs/products/DecentralizedAIPlatform/Daemon/daemon-api/
   baseURL: https://services.singularitynet.io
   tags:
+  - Organization
+  tags_raw:
   - Organizations
   properties:
   - type: OpenAPI
