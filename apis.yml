@@ -154,6 +154,8 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/singularity-net/refs/heads/main/rules/singularitynet-rules.yml
 common:
+  - type: Website
+    url: https://www.singularitynet.io/
   - type: AgenticAccess
     url: agentic-access/singularity-net-agentic-access.yml
   - type: DomainSecurity
