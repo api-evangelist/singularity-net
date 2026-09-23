@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SingularityNET Marketplace Channels Service Groups API
+  title: SingularityNET Marketplace Service Groups API
   description: The SingularityNET Marketplace REST API provides service discovery, organization management, and metadata access for the decentralized AI network. Browse available AI services, retrieve service metadata, check pricing, and access organization information. Service invocation uses gRPC through the daemon (snetd).
   version: '1.0'
   contact:
@@ -48,6 +48,20 @@ paths:
                       $ref: '#/components/schemas/ServiceGroup'
 components:
   schemas:
+    Pricing:
+      type: object
+      properties:
+        price_model:
+          type: string
+          enum:
+          - fixed_price
+          - fixed_price_per_kilo_bytes
+          description: Pricing model
+        price_in_cogs:
+          type: integer
+          description: Price per call in cogs (1 ASI = 10^8 cogs)
+        default:
+          type: boolean
     ServiceGroup:
       type: object
       properties:
@@ -79,20 +93,6 @@ components:
               type: integer
             payment_channel_storage_type:
               type: string
-    Pricing:
-      type: object
-      properties:
-        price_model:
-          type: string
-          enum:
-          - fixed_price
-          - fixed_price_per_kilo_bytes
-          description: Pricing model
-        price_in_cogs:
-          type: integer
-          description: Price per call in cogs (1 ASI = 10^8 cogs)
-        default:
-          type: boolean
 externalDocs:
   description: SingularityNET Developer Portal
   url: https://dev.singularitynet.io

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SingularityNET Marketplace Channels Organizations API
+  title: SingularityNET Marketplace Organizations API
   description: The SingularityNET Marketplace REST API provides service discovery, organization management, and metadata access for the decentralized AI network. Browse available AI services, retrieve service metadata, check pricing, and access organization information. Service invocation uses gRPC through the daemon (snetd).
   version: '1.0'
   contact:
@@ -79,6 +79,20 @@ paths:
           description: Organization not found
 components:
   schemas:
+    Contact:
+      type: object
+      properties:
+        contact_type:
+          type: string
+          enum:
+          - general
+          - support
+          - technical
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
     Organization:
       type: object
       properties:
@@ -114,20 +128,6 @@ components:
           description: IPFS URI for organization metadata
         service_count:
           type: integer
-    Contact:
-      type: object
-      properties:
-        contact_type:
-          type: string
-          enum:
-          - general
-          - support
-          - technical
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
     Asset:
       type: object
       properties:

@@ -1,0 +1,31 @@
+# Front Door AI Index — singularity-net — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: singularity-net
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.singularitynet.io
+  final_host: singularitynet.io
+  ownership: own
+  owner: singularity-net
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 19
+  host_score: 19
+  density: 30.45
+  words: 624
+  tiers:
+    agentic: 4
+    core: 15
+    model: 0
+  ambiguous: 4
+  top_terms:
+    AI: 15
+    AI agent: 2
+    agent: 2
+    agentic: 1
+    cognitive: 1
+    inference: 1
+    intelligence: 1

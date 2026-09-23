@@ -1,10 +1,7 @@
 {
   "provider": "singularity-net",
   "sources": [
-    "singularity-net-channels-api-openapi.yml",
-    "singularity-net-organizations-api-openapi.yml",
-    "singularity-net-service-groups-api-openapi.yml",
-    "singularity-net-services-api-openapi.yml"
+    "_original/singularitynet-marketplace-openapi.yml"
   ],
   "outputs": [
     "singularity-net-channels-api-openapi.yml",
@@ -15,6 +12,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "singularitynet-marketplace-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "singularity-net-channels-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "singularity-net-organizations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "singularity-net-service-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "singularity-net-services-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

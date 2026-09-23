@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: SingularityNET Marketplace Channels API
   description: The SingularityNET Marketplace REST API provides service discovery, organization management, and metadata access for the decentralized AI network. Browse available AI services, retrieve service metadata, check pricing, and access organization information. Service invocation uses gRPC through the daemon (snetd).
@@ -103,6 +103,27 @@ paths:
                     $ref: '#/components/schemas/PaymentChannel'
 components:
   schemas:
+    ChannelOpenRequest:
+      type: object
+      required:
+      - org_id
+      - service_id
+      - group_id
+      - amount_in_cogs
+      - expiration
+      properties:
+        org_id:
+          type: string
+        service_id:
+          type: string
+        group_id:
+          type: string
+        amount_in_cogs:
+          type: string
+          description: Amount of ASI tokens to deposit (in cogs)
+        expiration:
+          type: integer
+          description: Channel expiration block number
     PaymentChannel:
       type: object
       properties:
@@ -127,27 +148,6 @@ components:
         signer:
           type: string
           description: Ethereum address of channel signer
-    ChannelOpenRequest:
-      type: object
-      required:
-      - org_id
-      - service_id
-      - group_id
-      - amount_in_cogs
-      - expiration
-      properties:
-        org_id:
-          type: string
-        service_id:
-          type: string
-        group_id:
-          type: string
-        amount_in_cogs:
-          type: string
-          description: Amount of ASI tokens to deposit (in cogs)
-        expiration:
-          type: integer
-          description: Channel expiration block number
 externalDocs:
   description: SingularityNET Developer Portal
   url: https://dev.singularitynet.io
