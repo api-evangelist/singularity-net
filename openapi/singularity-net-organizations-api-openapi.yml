@@ -79,20 +79,6 @@ paths:
           description: Organization not found
 components:
   schemas:
-    Contact:
-      type: object
-      properties:
-        contact_type:
-          type: string
-          enum:
-          - general
-          - support
-          - technical
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
     Organization:
       type: object
       properties:
@@ -137,6 +123,20 @@ components:
         ipfs_hash:
           type: string
           description: IPFS content hash
+    Contact:
+      type: object
+      properties:
+        contact_type:
+          type: string
+          enum:
+          - general
+          - support
+          - technical
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
 externalDocs:
   description: SingularityNET Developer Portal
   url: https://dev.singularitynet.io
