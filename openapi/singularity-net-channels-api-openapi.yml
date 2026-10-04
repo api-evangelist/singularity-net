@@ -103,27 +103,6 @@ paths:
                     $ref: '#/components/schemas/PaymentChannel'
 components:
   schemas:
-    ChannelOpenRequest:
-      type: object
-      required:
-      - org_id
-      - service_id
-      - group_id
-      - amount_in_cogs
-      - expiration
-      properties:
-        org_id:
-          type: string
-        service_id:
-          type: string
-        group_id:
-          type: string
-        amount_in_cogs:
-          type: string
-          description: Amount of ASI tokens to deposit (in cogs)
-        expiration:
-          type: integer
-          description: Channel expiration block number
     PaymentChannel:
       type: object
       properties:
@@ -148,6 +127,27 @@ components:
         signer:
           type: string
           description: Ethereum address of channel signer
+    ChannelOpenRequest:
+      type: object
+      required:
+      - org_id
+      - service_id
+      - group_id
+      - amount_in_cogs
+      - expiration
+      properties:
+        org_id:
+          type: string
+        service_id:
+          type: string
+        group_id:
+          type: string
+        amount_in_cogs:
+          type: string
+          description: Amount of ASI tokens to deposit (in cogs)
+        expiration:
+          type: integer
+          description: Channel expiration block number
 externalDocs:
   description: SingularityNET Developer Portal
   url: https://dev.singularitynet.io

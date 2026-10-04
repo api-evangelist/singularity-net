@@ -79,6 +79,15 @@ paths:
           description: Organization not found
 components:
   schemas:
+    Asset:
+      type: object
+      properties:
+        url:
+          type: string
+          description: Direct URL to the asset
+        ipfs_hash:
+          type: string
+          description: IPFS content hash
     Organization:
       type: object
       properties:
@@ -114,15 +123,6 @@ components:
           description: IPFS URI for organization metadata
         service_count:
           type: integer
-    Asset:
-      type: object
-      properties:
-        url:
-          type: string
-          description: Direct URL to the asset
-        ipfs_hash:
-          type: string
-          description: IPFS content hash
     Contact:
       type: object
       properties:
