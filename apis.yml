@@ -154,6 +154,12 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/singularity-net/refs/heads/main/rules/singularitynet-rules.yml
 common:
+  - type: Plans
+    url: plans/singularity-net-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/singularity-net-rate-limits.yml
+  - type: FinOps
+    url: finops/singularity-net-finops.yml
   - type: Website
     url: https://www.singularitynet.io/
   - type: AgenticAccess
